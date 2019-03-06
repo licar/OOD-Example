@@ -1,0 +1,7 @@
+D:\projects\Staff\Staff\bin\Debug\Staff.exe.config
+D:\projects\Staff\Staff\bin\Debug\Staff.exe
+D:\projects\Staff\Staff\bin\Debug\Staff.pdb
+D:\projects\Staff\Staff\obj\Debug\Staff.csprojAssemblyReference.cache
+D:\projects\Staff\Staff\obj\Debug\Staff.csproj.CoreCompileInputs.cache
+D:\projects\Staff\Staff\obj\Debug\Staff.exe
+D:\projects\Staff\Staff\obj\Debug\Staff.pdb
