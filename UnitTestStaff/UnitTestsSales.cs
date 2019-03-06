@@ -1,0 +1,50 @@
+﻿using System;
+using Core;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace UnitTestStaff
+{
+    [TestClass]
+    public class UnitTestsSales
+    {
+        private const int BASE_SALARY = 1000;
+        private const int ONE_YEAR_SALARY = 1010;
+        private const int ONE_SUBORDINATE_ONE_YEAR_SALARY = 1003;
+        private const int THIRTY_FOUR_YEARS_SALARY = 1340;
+        private const int MAX_SALARY = 1350;
+
+
+        [TestMethod]
+        public void SalesYearsSalaryTest()
+        {
+            var firstYearSales = StaffFactory.Get(nameof(Sales), "User", DateTime.Now, BASE_SALARY);
+            Assert.AreEqual(BASE_SALARY, firstYearSales.GetSalary());
+
+            var secondYearSales = StaffFactory.Get(nameof(Sales),
+                "User",
+                new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day - 1),
+                BASE_SALARY);
+            Assert.AreEqual(ONE_YEAR_SALARY, secondYearSales.GetSalary());
+
+            var thirtyFourYearsSales = StaffFactory.Get(nameof(Sales),
+                "User",
+                new DateTime(DateTime.Now.Year - 35, DateTime.Now.Month, DateTime.Now.Day + 1),
+                BASE_SALARY);
+            Assert.AreEqual(THIRTY_FOUR_YEARS_SALARY, thirtyFourYearsSales.GetSalary());
+
+            var hundredYearsSales = StaffFactory.Get(nameof(Sales),
+                "User",
+                new DateTime(DateTime.Now.Year - 100, DateTime.Now.Month, DateTime.Now.Day - 1),
+                BASE_SALARY);
+            Assert.AreEqual(MAX_SALARY, hundredYearsSales.GetSalary());
+        }
+
+        [TestMethod]
+        public void SalesOneSubordinateTest()
+        {
+            var subordinate = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
+            var managerFirstYear = StaffFactory.Get(nameof(Sales), "User", DateTime.Now, BASE_SALARY, new IStaff[] { subordinate });
+            Assert.AreEqual(ONE_SUBORDINATE_ONE_YEAR_SALARY, managerFirstYear.GetSalary());
+        }
+    }
+}
