@@ -1,6 +1,0 @@
-D:\projects\Staff\Core\bin\Debug\Core.dll
-D:\projects\Staff\Core\bin\Debug\Core.pdb
-D:\projects\Staff\Core\obj\Debug\Core.csprojAssemblyReference.cache
-D:\projects\Staff\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
-D:\projects\Staff\Core\obj\Debug\Core.dll
-D:\projects\Staff\Core\obj\Debug\Core.pdb

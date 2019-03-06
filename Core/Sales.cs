@@ -10,7 +10,7 @@ namespace Core
         {
             MaxPersent = 35;
             YearPersent = 1;
-            SubordinantPersent = 0.03f;
+            SubordinantPersent = 0.3f;
         }
     }
 }

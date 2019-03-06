@@ -17,7 +17,7 @@ namespace Core
 
         public override int GetSalary()
         {
-            return (int)(base.GetSalary() + Subordinates.Sum(s => s.GetSalary()) * SubordinantPersent / 100);
+            return (int)(base.GetSalary() + (Subordinates?.Sum(s => s.GetSalary()) ?? 0) * SubordinantPersent / 100);
         }
     }
 }
