@@ -17,24 +17,24 @@ namespace UnitTestStaff
         [TestMethod]
         public void ManagerYearsSalaryTest()
         {
-            var firstYearManager = StaffFactory.Get(nameof(Manager), "User", DateTime.Now, BASE_SALARY);
+            var firstYearManager = StaffFactory.Get(StaffFactory.MANAGER, "User", DateTime.Today, BASE_SALARY);
             Assert.AreEqual(firstYearManager.GetSalary(), BASE_SALARY);
 
-            var secondYearManager = StaffFactory.Get(nameof(Manager),
+            var secondYearManager = StaffFactory.Get(StaffFactory.MANAGER,
                 "User",
-                new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day - 1),
+                new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day - 1),
                 BASE_SALARY);
             Assert.AreEqual(secondYearManager.GetSalary(), ONE_YEAR_SALARY);
 
-            var tenYearsManager = StaffFactory.Get(nameof(Manager),
+            var tenYearsManager = StaffFactory.Get(StaffFactory.MANAGER,
                 "User",
-                new DateTime(DateTime.Now.Year - 8, DateTime.Now.Month, DateTime.Now.Day + 1),
+                new DateTime(DateTime.Today.Year - 8, DateTime.Today.Month, DateTime.Today.Day + 1),
                 BASE_SALARY);
             Assert.AreEqual(tenYearsManager.GetSalary(), SEVEN_YEARS_SALARY);
 
-            var hundredYearsManager = StaffFactory.Get(nameof(Manager),
+            var hundredYearsManager = StaffFactory.Get(StaffFactory.MANAGER,
                 "User",
-                new DateTime(DateTime.Now.Year - 100, DateTime.Now.Month, DateTime.Now.Day - 1),
+                new DateTime(DateTime.Today.Year - 100, DateTime.Today.Month, DateTime.Today.Day - 1),
                 BASE_SALARY);
             Assert.AreEqual(hundredYearsManager.GetSalary(), MAX_SALARY);
         }
@@ -42,14 +42,14 @@ namespace UnitTestStaff
         [TestMethod]
         public void ManagerOneSubordinateTest()
         {
-            var subordinate = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
-            var managerFirstYear = StaffFactory.Get(nameof(Manager), "User", DateTime.Now, BASE_SALARY, new IStaff[] { subordinate });
+            var subordinate = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, BASE_SALARY);
+            var managerFirstYear = StaffFactory.Get(StaffFactory.MANAGER, "User", DateTime.Today, BASE_SALARY, new IStaff[] { subordinate });
             Assert.AreEqual(managerFirstYear.GetSalary(), ONE_SUBORDINATE_ONE_YEAR_SALARY);
 
             var managerSecondYear = StaffFactory.Get(
-                nameof(Manager), 
+                StaffFactory.MANAGER, 
                 "User",
-                new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day + 1), 
+                new DateTime(DateTime.Today.Year - 1, DateTime.Today.Month, DateTime.Today.Day + 1), 
                 BASE_SALARY, 
                 new IStaff[] { subordinate });
             Assert.AreEqual(managerSecondYear.GetSalary(), ONE_SUBORDINATE_ONE_YEAR_SALARY);

@@ -17,20 +17,21 @@ namespace UnitTestStaff
         [TestMethod]
         public void EmployeeZeroSalaryTest()
         {
-            var employeeZeroSalary = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, ZERO_SALARY);
+            var employeeZeroSalary = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, ZERO_SALARY);
             Assert.AreEqual(ZERO_SALARY, employeeZeroSalary.GetSalary());
 
-            var employeeZeroSalaryHundredYears = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, ZERO_SALARY);
+            var employeeZeroSalaryHundredYears = StaffFactory.Get(
+                nameof(Employee),
+                "User",
+                new DateTime(DateTime.Today.Year - 100, DateTime.Today.Month, DateTime.Today.Day - 1),
+                ZERO_SALARY);
             Assert.AreEqual(ZERO_SALARY, employeeZeroSalaryHundredYears.GetSalary());
         }
 
         [TestMethod]
         public void EmployeeFirstYearSalaryTest()
         {
-            var firstDayEmployee = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
-            Assert.AreEqual(BASE_SALARY, firstDayEmployee.GetSalary());
-
-            var firstYearEmployee = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
+            var firstDayEmployee = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, BASE_SALARY);
             Assert.AreEqual(BASE_SALARY, firstDayEmployee.GetSalary());
         }
 
@@ -38,7 +39,7 @@ namespace UnitTestStaff
         public void EmployeeMoreThanOneYearSalaryTest()
         {
             var secondYearEmployee = StaffFactory.Get(nameof(Employee), "User",
-                new DateTime(DateTime.Now.Year - 1, DateTime.Now.Month, DateTime.Now.Day - 1), BASE_SALARY);
+                new DateTime(DateTime.Today.Year - 1, DateTime.Now.Month, DateTime.Today.Day - 1), BASE_SALARY);
             Assert.AreEqual(ONE_YEAR_SALARY, secondYearEmployee.GetSalary());
         }
 
@@ -46,7 +47,7 @@ namespace UnitTestStaff
         public void EmployeeNineYearsSalaryTest()
         {
             var nineYearsEmployee = StaffFactory.Get(nameof(Employee), "User",
-                new DateTime(DateTime.Now.Year - 10, DateTime.Now.Month, DateTime.Now.Day + 1), BASE_SALARY);
+                new DateTime(DateTime.Today.Year - 10, DateTime.Now.Month, DateTime.Today.Day + 1), BASE_SALARY);
             Assert.AreEqual(NINE_YEARS_SALARY, nineYearsEmployee.GetSalary());
         }
 
@@ -54,11 +55,11 @@ namespace UnitTestStaff
         public void EmployeeTenYearsAndMoreSalaryTest()
         {
             var tenYearsEmployee = StaffFactory.Get(nameof(Employee), "User",
-                new DateTime(DateTime.Now.Year - 10, DateTime.Now.Month, DateTime.Now.Day - 1), BASE_SALARY);
+                new DateTime(DateTime.Today.Year - 10, DateTime.Now.Month, DateTime.Today.Day - 1), BASE_SALARY);
             Assert.AreEqual(MAX_SALARY, tenYearsEmployee.GetSalary());
 
             var hundredYearsEmployee = StaffFactory.Get(nameof(Employee), "User",
-                new DateTime(DateTime.Now.Year - 10, DateTime.Now.Month, DateTime.Now.Day - 1), BASE_SALARY);
+                new DateTime(DateTime.Today.Year - 10, DateTime.Now.Month, DateTime.Today.Day - 1), BASE_SALARY);
             Assert.AreEqual(MAX_SALARY, hundredYearsEmployee.GetSalary());
         }
     }

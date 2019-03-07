@@ -15,40 +15,40 @@ namespace UnitTestStaff
         [TestMethod]
         public void SupervisorWithoutSubordinatesTest()
         {
-            var supervisorNullSubordinates = StaffFactory.Get(nameof(Manager), "User", DateTime.Now, BASE_SALARY);
+            var supervisorNullSubordinates = StaffFactory.Get(StaffFactory.MANAGER, "User", DateTime.Today, BASE_SALARY);
             Assert.AreEqual(supervisorNullSubordinates.GetSalary(), BASE_SALARY);
 
             var supervisorEmptySubordinates =
-                StaffFactory.Get(nameof(Manager), "User", DateTime.Now, BASE_SALARY, new IStaff[0]);
+                StaffFactory.Get(StaffFactory.MANAGER, "User", DateTime.Today, BASE_SALARY, new IStaff[0]);
             Assert.AreEqual(supervisorEmptySubordinates.GetSalary(), BASE_SALARY);
         }
 
         [TestMethod]
         public void SupervisorOneSubordinateTest()
         {
-            var subordinate = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
-            var supervisor = StaffFactory.Get(nameof(Manager), "User", DateTime.Now, BASE_SALARY, new IStaff[]{subordinate});
+            var subordinate = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, BASE_SALARY);
+            var supervisor = StaffFactory.Get(StaffFactory.MANAGER, "User", DateTime.Today, BASE_SALARY, new IStaff[]{subordinate});
             Assert.AreEqual(supervisor.GetSalary(), ONE_SUBORDINATE_SALARY);
         }
 
         [TestMethod]
         public void SupervisorTwoSubordinatesTest()
         {
-            var subordinateOne = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
-            var subordinateTwo = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
+            var subordinateOne = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, BASE_SALARY);
+            var subordinateTwo = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, BASE_SALARY);
             var supervisor = 
-                StaffFactory.Get(nameof(Manager), "User", DateTime.Now, BASE_SALARY, new IStaff[] { subordinateOne, subordinateTwo });
+                StaffFactory.Get(StaffFactory.MANAGER, "User", DateTime.Today, BASE_SALARY, new IStaff[] { subordinateOne, subordinateTwo });
             Assert.AreEqual(supervisor.GetSalary(), TWO_SUBORDINATES_SALARY);
         }
 
         [TestMethod]
         public void SupervisorHundredYearsWithOneSubordinateTest()
         {
-            var subordinateOne = StaffFactory.Get(nameof(Employee), "User", DateTime.Now, BASE_SALARY);
+            var subordinateOne = StaffFactory.Get(nameof(Employee), "User", DateTime.Today, BASE_SALARY);
             var supervisor =
-                StaffFactory.Get(nameof(Manager), 
+                StaffFactory.Get(StaffFactory.MANAGER, 
                     "User",
-                    new DateTime(DateTime.Now.Year - 100, DateTime.Now.Month, DateTime.Now.Day - 1), 
+                    new DateTime(DateTime.Today.Year - 100, DateTime.Today.Month, DateTime.Today.Day - 1), 
                     BASE_SALARY, 
                     new IStaff[] { subordinateOne });
             Assert.AreEqual(supervisor.GetSalary(), MAX_SALARY_WITH_ONE_SUBORDIANTE);

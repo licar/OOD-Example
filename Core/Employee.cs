@@ -5,29 +5,29 @@ namespace Core
     public class Employee : IStaff
     {
         private readonly DateTime zeroTime;
-        private int workedYears => (zeroTime + (DateTime.Now - Date)).Year - 1;
-        private int salaryIncrease =>
-            (workedYears * YearPersent > MaxPersent 
-                ? Salary * MaxPersent 
-                : Salary * YearPersent * workedYears) / 100;
+        private readonly int maxPersent;
+        private readonly int yearPersent;
 
-        protected int MaxPersent = 30;
-        protected int YearPersent = 3;
-
+        private int workedYears => (zeroTime + (DateTime.Today - Date)).Year - 1;
         protected int Salary { get; }
         public string Name { get; }
         public DateTime Date { get; }
 
-        public Employee(string name, DateTime date, int salary)
+        public Employee(string name, DateTime date, int salary, int yearPersent, int maxPersent)
         {
             Name = name;
             Date = date;
             Salary = salary;
+            this.yearPersent = yearPersent;
+            this.maxPersent = maxPersent;
             zeroTime = new DateTime(1, 1, 1);
         }
 
         public virtual int GetSalary()
         {
+            var salaryIncrease = (workedYears * yearPersent > maxPersent 
+                                    ? Salary * maxPersent
+                                    : Salary * yearPersent * workedYears) / 100;
             return Salary + salaryIncrease;
         }
     }

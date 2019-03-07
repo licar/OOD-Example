@@ -43,10 +43,9 @@
   <ItemGroup>
     <Compile Include="Employee.cs" />
     <Compile Include="IStaff.cs" />
-    <Compile Include="Sales.cs" />
+    <Compile Include="ISupervisor.cs" />
     <Compile Include="StaffFactory.cs" />
     <Compile Include="Supervisor.cs" />
-    <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
